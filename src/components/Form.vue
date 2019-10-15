@@ -4,24 +4,61 @@
       <h1>REGISTRO</h1>
     </div>
     <div class="form-data">
-      <input type="text" placeholder="Nombre">
-      <input type="text" placeholder="Apellido">
-      <input type="text" placeholder="Nombre de usuario">
-      <input type="text" placeholder="Contraseña">
+      <input ref="firstNameField" type="text" placeholder="Nombre">
+      <input ref="lastNameField" type="text" placeholder="Apellido">
+      <input ref="usernameField" type="text" placeholder="Nombre de usuario">
+      <input ref="passwordField" type="password" placeholder="Contraseña">
     </div>
     <div class="buttons">
-      <button>Crear con REST</button>
-      <button>Crear con GraphQL</button>
+      <button v-on:click="sendRest">Crear con REST</button>
+      <button v-on:click="sendGraphQl">Crear con GraphQL</button>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
-  }
+  },
+  mounted(){
+    console.log("Hello world!");
+     },
+  methods:{
+    sendRest: function (params) {
+      console.log("Rest");
+      let url = "http://localhost:4000/sa-auth-ms/resources/users/";
+      //firstName, lastName, username, password 3308 /users
+      let firstName = this.$refs.firstNameField.value;
+      let lastName = this.$refs.lastNameField.value;
+      let username = this.$refs.usernameField.value;
+      let password = this.$refs.passwordField.value;
+      console.log(firstName,lastName,username,password);
+  
+      axios.post(url,{firstName: firstName,lastName: lastName,username:username,password:password })
+      .then(Response =>{
+        alert("Usuario creado satisfactoriamente desde Microservicio: "+Response+"");
+      })
+      .catch(e =>{
+
+      });
+      
+    },
+    sendGraphQl: function (params){
+      console.log("Ql");
+      let url = "http://localhost:5000/graphiql";
+      let firstName = this.$refs.firstNameField.value;
+      let lastName = this.$refs.lastNameField.value;
+      let username = this.$refs.usernameField.value;
+      let password = this.$refs.passwordField.value;
+      
+    }
+    
+    }
+
 }
 </script>
 
