@@ -18,6 +18,7 @@
 
 <script>
 import axios from 'axios';
+import { gql } from "apollo-boost";
 
 export default {
   name: 'HelloWorld',

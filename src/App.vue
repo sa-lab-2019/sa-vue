@@ -6,30 +6,6 @@
 
 <script>
 import Form from './components/Form.vue';
-import ApolloClient from 'apollo-boost';
-import Vue from 'vue';
-import VueApollo from 'vue-apollo';
-
-
-
-const apolloClient = new ApolloClient({
-  // You should use an absolute URL here
-  uri: 'http://localhost:5000/graphiql'
-});
-
-
-Vue.use(VueApollo);
-
-const apolloProvider = new VueApollo({
-  defaultClient: apolloClient,
-});
-
-new Vue({
-  el: '#app',
-  // inject apolloProvider here like vue-router or vuex
-  apolloProvider,
-  render: h => h(this),
-});
 
 
 
