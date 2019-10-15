@@ -54,11 +54,30 @@ export default {
       let lastName = this.$refs.lastNameField.value;
       let username = this.$refs.usernameField.value;
       let password = this.$refs.passwordField.value;
-      
-    }
+      let user = {
+        firstName: firstName,
+        lastName: lastName,
+        username: username,
+        password: password
+      };
+     //mutation
+       async  () => {
+      // Call to the graphql mutation
+      const result = await this.$apollo.mutate({
+        // Query
+        mutation: gql`mutation {
+          createUser(user:$user)}`,
+        // Parameters
+        variables: {
+          user: this.user,
+        },
+      }).then(Response => {
+        alert("Usuario creado satisfactoriamente desde Microservicio: "+Response+"");
+      }); 
+      }
     
     }
-
+  }
 }
 </script>
 
